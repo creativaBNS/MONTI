@@ -550,8 +550,8 @@
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">رقم الهاتف <span class="text-xs text-gray-400 font-normal">(أو كلمة مرور الإدارة)</span></label>
-                    <input type="password" id="login-phone" placeholder="أدخل رقم الهاتف..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
-                </div>
+                    <!-- قم بتغيير type="password" إلى type="text" -->
+                    <input type="text" id="login-phone" placeholder="أدخل رقم الهاتف..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
                 <p id="login-error" class="text-red-500 text-sm hidden font-bold">يرجى إدخال البيانات المطلوبة بشكل صحيح!</p>
                 <button id="login-btn" class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition mt-4 shadow-md">الدخول للبوابة <i class="fas fa-arrow-left mr-2"></i></button>
             </div>
@@ -609,8 +609,7 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- 2. Camera Tab (معدل للبث المباشر) -->
+<!-- 2. Camera Tab (معدل للبث المباشر) -->
                 <div id="tab-camera" class="tab-content">
                     <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
@@ -620,6 +619,7 @@
                         
                         <!-- إطار فيديو اليوتيوب (Iframe) المباشر -->
                         <div class="bg-gray-900 w-full aspect-video rounded-xl flex flex-col items-center justify-center relative overflow-hidden border-4 border-gray-800">
+                            <!-- تم إضافة المعرف live-video-iframe للتأكد من استهدافه برمجياً -->
                             <iframe id="live-video-iframe" class="w-full h-full" src="https://www.youtube.com/embed/tb8C4juCOuE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                         </div>
 
@@ -768,7 +768,7 @@
             if (btn) btn.classList.add('active-tab');
         };
 
-        /* ===== نظام تسجيل الدخول و Firebase ===== */
+/* ===== نظام تسجيل الدخول و Firebase ===== */
         document.getElementById('login-btn').addEventListener('click', async () => {
             const nameInput = document.getElementById('login-name').value.trim();
             const phoneInput = document.getElementById('login-phone').value.trim();
@@ -803,6 +803,7 @@
                     });
                 } catch (e) {
                     console.error("Error saving data: ", e);
+                    alert("تنبيه: لم يتم حفظ البيانات بسبب قواعد الحماية (Rules) في Firestore، لكن يمكنك الدخول.");
                 }
             }
             
@@ -841,14 +842,18 @@
                     embedUrl = `https://www.youtube.com/embed/${id}`;
                 }
 
+                // تحديث الإطار مباشرة للمستخدم الحالي
+                document.getElementById('live-video-iframe').src = embedUrl;
+
                 try {
-                    await setDoc(streamDocRef, { url: embedUrl });
+                    await setDoc(streamDocRef, { url: embedUrl }, { merge: true });
                     const msg = document.getElementById('admin-msg');
                     msg.style.display = 'block';
                     document.getElementById('admin-stream-url').value = '';
                     setTimeout(() => { msg.style.display = 'none'; }, 4000);
                 } catch (e) {
                     console.error("Error updating link: ", e);
+                    alert("خطأ: تعذر حفظ الرابط الجديد في قاعدة البيانات بسبب صلاحيات Firestore، لكن تم تحديثه على شاشتك مؤقتاً.");
                 }
             }
         });
