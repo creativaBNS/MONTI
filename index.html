@@ -56,9 +56,9 @@
         @keyframes spin-slow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .animate-spin-slow { animation: spin-slow 6s linear infinite; }
 
-        /* ===== نافذة بوابة أولياء الأمور ===== */
-        #portal-modal { display: none; }
-        #portal-modal.open { display: flex; }
+        /* ===== نافذة بوابة أولياء الأمور وتسجيل الدخول ===== */
+        #portal-modal, #login-modal { display: none; }
+        #portal-modal.open, #login-modal.open { display: flex; }
 
         .tab-content { display: none; }
         .tab-content.active { display: block; }
@@ -266,7 +266,6 @@
                         </ul>
                     </div>
                     <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-white transform rotate-2 hover:rotate-0 transition-all">
-                       <!-- صورة أطفال يلعبون بأمان -->
                        <img src="https://images.unsplash.com/photo-1594608661623-aa0bd3a69d98?q=80&w=1000&auto=format&fit=crop" alt="Safe Kids" class="w-full h-64 object-cover">
                     </div>
                 </div>
@@ -274,7 +273,6 @@
                 <!-- Feature 2: Robots -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 flex-col-reverse md:flex-row-reverse">
                     <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-white transform -rotate-2 hover:rotate-0 transition-all">
-                        <!-- صورة روبوت/تكنولوجيا للأطفال -->
                         <img src="https://images.unsplash.com/photo-1546776310-eef45dd6d63c?q=80&w=1000&auto=format&fit=crop" alt="Smart Robot" class="w-full h-64 object-cover">
                     </div>
                     <div>
@@ -381,7 +379,7 @@
                         </div>
                         <img src="https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=2073&auto=format&fit=crop" alt="Kids in Class" class="w-full h-auto rounded-xl opacity-90">
 
-                        <!-- زر فتح بوابة أولياء الأمور (يفتح النافذة المنبثقة الكاملة) -->
+                        <!-- زر فتح بوابة أولياء الأمور -->
                         <div class="absolute inset-0 bg-black/60 rounded-xl flex items-center justify-center p-4 backdrop-blur-sm transition-opacity">
                             <button onclick="openPortal()" class="bg-white text-primary font-bold px-8 py-4 rounded-2xl shadow-2xl hover:scale-105 transition-all flex flex-col items-center gap-2">
                                 <i class="fas fa-video text-secondary text-3xl"></i>
@@ -510,7 +508,6 @@
                 </div>
 
                 <div class="flex flex-col gap-4 text-center md:text-start font-medium">
-                    <!-- تحويل رابط الهاتف إلى رابط واتساب -->
                     <a href="https://wa.me/201152147430" target="_blank" class="hover:text-accent transition flex items-center justify-center md:justify-start gap-3 text-lg">
                         <i class="fab fa-whatsapp text-green-500 text-2xl"></i> <span class="direction-ltr">0115 214 7430</span>
                     </a>
@@ -537,6 +534,30 @@
         </div>
     </footer>
 
+    <!-- ================= LOGIN MODAL ================= -->
+    <div id="login-modal" class="fixed inset-0 z-[70] bg-black/60 backdrop-blur-sm items-center justify-center p-4">
+        <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full border border-gray-200 text-right" dir="rtl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-extrabold text-primary">تسجيل الدخول</h2>
+                <button onclick="closeLogin()" class="text-gray-400 hover:text-accent"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <p class="text-gray-500 text-sm font-medium mb-6">يرجى كتابة اسمك ورقم الهاتف للدخول إلى بوابة الآباء.</p>
+            
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">اسم ولي الأمر</label>
+                    <input type="text" id="login-name" placeholder="الاسم كاملاً..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
+                </div>
+                <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">رقم الهاتف <span class="text-xs text-gray-400 font-normal">(أو كلمة مرور الإدارة)</span></label>
+                    <input type="password" id="login-phone" placeholder="أدخل رقم الهاتف..." class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary">
+                </div>
+                <p id="login-error" class="text-red-500 text-sm hidden font-bold">يرجى إدخال البيانات المطلوبة بشكل صحيح!</p>
+                <button id="login-btn" class="w-full bg-primary text-white font-bold py-3 rounded-xl hover:bg-blue-900 transition mt-4 shadow-md">الدخول للبوابة <i class="fas fa-arrow-left mr-2"></i></button>
+            </div>
+        </div>
+    </div>
+
     <!-- ================= PARENT PORTAL MODAL ================= -->
     <div id="portal-modal" class="fixed inset-0 z-[60] bg-black/60 backdrop-blur-sm items-center justify-center p-4">
         <div class="bg-gray-50 w-full max-w-6xl h-[90vh] rounded-3xl shadow-2xl flex flex-col md:flex-row overflow-hidden border border-gray-200">
@@ -549,10 +570,10 @@
                 </div>
 
                 <div class="p-4 border-b border-gray-100 flex items-center gap-4 bg-slate-50">
-                    <div class="w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center text-xl shadow-inner font-bold">أ</div>
+                    <div class="w-12 h-12 bg-secondary text-white rounded-full flex items-center justify-center text-xl shadow-inner font-bold" id="parent-avatar">أ</div>
                     <div>
-                        <h3 class="font-extrabold text-primary">أحمد محمود</h3>
-                        <p class="text-xs font-bold text-gray-500">فصل النجوم (KG2)</p>
+                        <h3 class="font-extrabold text-primary" id="parent-display-name">ولي الأمر</h3>
+                        <p class="text-xs font-bold text-gray-500">مرحباً بك في الحضانة</p>
                     </div>
                 </div>
 
@@ -568,8 +589,8 @@
             <!-- Main Content -->
             <main class="flex-1 p-6 overflow-y-auto bg-gray-50">
                 <header class="mb-8">
-                    <h2 class="text-2xl font-extrabold text-primary mb-1">أهلاً بك، والد أحمد 👋</h2>
-                    <p class="text-gray-500 font-medium">إليك ملخص وتفاصيل يوم طفلك حتى الآن.</p>
+                    <h2 class="text-2xl font-extrabold text-primary mb-1">أهلاً بك 👋</h2>
+                    <p class="text-gray-500 font-medium">إليك ملخص وتفاصيل اليوم.</p>
                 </header>
 
                 <!-- 1. Overview Tab -->
@@ -589,16 +610,27 @@
                     </div>
                 </div>
 
-                <!-- 2. Camera Tab -->
+                <!-- 2. Camera Tab (معدل للبث المباشر) -->
                 <div id="tab-camera" class="tab-content">
                     <div class="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
                         <div class="flex justify-between items-center mb-4">
                             <h3 class="text-lg font-bold text-primary"><span class="bg-red-100 text-red-600 px-2 py-1 rounded text-sm animate-pulse mr-2">LIVE</span> كاميرا الفصل المباشرة</h3>
                             <span class="text-xs font-bold text-gray-400">مشفر ومؤمن</span>
                         </div>
+                        
+                        <!-- إطار فيديو اليوتيوب (Iframe) المباشر -->
                         <div class="bg-gray-900 w-full aspect-video rounded-xl flex flex-col items-center justify-center relative overflow-hidden border-4 border-gray-800">
-                            <i class="fas fa-play-circle text-white/50 text-6xl hover:text-white hover:scale-110 transition cursor-pointer"></i>
-                            <p class="text-white/70 font-bold mt-4">اضغط للاتصال بالكاميرا الآمنة</p>
+                            <iframe id="live-video-iframe" class="w-full h-full" src="https://www.youtube.com/embed/tb8C4juCOuE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                        </div>
+
+                        <!-- لوحة تحكم الإدارة (تظهر فقط للأدمن) -->
+                        <div id="admin-controls" class="mt-6 p-5 bg-blue-50 border border-blue-200 rounded-xl hidden">
+                            <h4 class="font-bold text-primary mb-3"><i class="fas fa-cog text-secondary ml-1"></i> لوحة الإدارة: تحديث رابط البث</h4>
+                            <div class="flex flex-col md:flex-row gap-3">
+                                <input type="text" id="admin-stream-url" placeholder="ضع رابط اليوتيوب هنا (مثال: https://youtube.com/live/...)" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-secondary">
+                                <button id="admin-save-url" class="bg-secondary text-white px-6 py-2 rounded-lg font-bold hover:bg-teal-600 transition shadow">حفظ وتغيير الرابط</button>
+                            </div>
+                            <p id="admin-msg" class="text-sm mt-3 text-green-600 font-bold hidden"><i class="fas fa-check-circle"></i> تم تغيير وتحديث رابط البث المباشر بنجاح!</p>
                         </div>
                     </div>
                 </div>
@@ -610,7 +642,7 @@
                             <div class="bg-blue-100 text-blue-600 p-4 rounded-xl text-2xl"><i class="fas fa-thermometer-half"></i></div>
                             <div>
                                 <h3 class="font-bold text-primary text-lg">قياس الحرارة عبر الروبوت</h3>
-                                <p class="text-gray-600 font-medium">تم قياس درجة حرارة أحمد بواسطة روبوت أليكسا وهي (36.8°C) طبيعية.</p>
+                                <p class="text-gray-600 font-medium">تم قياس درجة حرارة الطفل بواسطة روبوت أليكسا وهي (36.8°C) طبيعية.</p>
                                 <span class="text-xs bg-gray-100 px-2 py-1 rounded text-gray-500 font-bold mt-2 inline-block">08:30 صباحاً</span>
                             </div>
                         </div>
@@ -640,7 +672,7 @@
                         </div>
                         <div class="flex-1 p-4 bg-slate-50 overflow-y-auto">
                             <div class="bg-white border border-gray-200 p-3 rounded-2xl rounded-tr-none max-w-[80%] mb-4 shadow-sm">
-                                <p class="text-gray-700 font-medium">أهلاً بك، أحمد متفاعل جداً في نشاط المونتيسوري اليوم!</p>
+                                <p class="text-gray-700 font-medium">أهلاً بك، طفلك متفاعل جداً في نشاط المونتيسوري اليوم!</p>
                                 <span class="text-[10px] text-gray-400 mt-1 block">10:00 ص</span>
                             </div>
                         </div>
@@ -655,15 +687,37 @@
         </div>
     </div>
 
-    <script>
-        /* ===== تبديل اللغة (يعمل على الموقع بأكمله) ===== */
-        function toggleLanguage() {
+    <!-- إعدادات Firebase والـ JavaScript -->
+    <script type="module">
+        // استدعاء خدمات Firebase باستخدام CDN للعمل بسلاسة على GitHub Pages
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics.js";
+        import { getFirestore, collection, addDoc, doc, setDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDTXrDtg0InqE-l6tUaGQeVO25rhgfZmgc",
+            authDomain: "monti-c523c.firebaseapp.com",
+            projectId: "monti-c523c",
+            storageBucket: "monti-c523c.firebasestorage.app",
+            messagingSenderId: "841754496889",
+            appId: "1:841754496889:web:87ff95bf0bcfb83bdda9a8",
+            measurementId: "G-XWRCD4LS2K"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const db = getFirestore(app);
+
+        // باسورد الأدمن السري
+        const ADMIN_PASS = "Mm@01157386377";
+
+        /* ===== إتاحة الدوال للواجهة الأساسية ===== */
+        window.toggleLanguage = function() {
             const htmlTag = document.getElementById('html-root');
             const btnTextDesktop = document.getElementById('lang-toggle-text');
             const btnTextMobile = document.getElementById('lang-toggle-text-mobile');
 
             if (htmlTag.classList.contains('lang-ar')) {
-                // تبديل إلى الإنجليزية
                 htmlTag.classList.remove('lang-ar');
                 htmlTag.classList.add('lang-en');
                 htmlTag.setAttribute('lang', 'en');
@@ -671,7 +725,6 @@
                 if (btnTextDesktop) btnTextDesktop.innerText = 'عربي';
                 if (btnTextMobile) btnTextMobile.innerText = 'عربي';
             } else {
-                // تبديل إلى العربية
                 htmlTag.classList.remove('lang-en');
                 htmlTag.classList.add('lang-ar');
                 htmlTag.setAttribute('lang', 'ar');
@@ -679,24 +732,33 @@
                 if (btnTextDesktop) btnTextDesktop.innerText = 'English';
                 if (btnTextMobile) btnTextMobile.innerText = 'EN';
             }
-        }
+        };
 
-        /* ===== فتح/إغلاق بوابة أولياء الأمور ===== */
-        function openPortal() {
-            document.getElementById('portal-modal').classList.add('open');
+        // فتح نافذة تسجيل الدخول بدلاً من فتح البوابة مباشرة
+        window.openPortal = function() {
+            document.getElementById('login-modal').classList.add('open');
             document.body.style.overflow = 'hidden';
-        }
-        function closePortal() {
+        };
+
+        window.closePortal = function() {
             document.getElementById('portal-modal').classList.remove('open');
             document.body.style.overflow = '';
-        }
-        // إغلاق النافذة عند الضغط خارج المحتوى
+        };
+
+        window.closeLogin = function() {
+            document.getElementById('login-modal').classList.remove('open');
+            document.body.style.overflow = '';
+        };
+
+        // إغلاق النوافذ عند الضغط خارج المحتوى
         document.getElementById('portal-modal').addEventListener('click', function (e) {
-            if (e.target === this) closePortal();
+            if (e.target === this) window.closePortal();
+        });
+        document.getElementById('login-modal').addEventListener('click', function (e) {
+            if (e.target === this) window.closeLogin();
         });
 
-        /* ===== التبديل بين تبويبات بوابة أولياء الأمور ===== */
-        function switchTab(tabName) {
+        window.switchTab = function(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active-tab'));
 
@@ -704,7 +766,92 @@
             const btn = document.getElementById('btn-' + tabName);
             if (tab) tab.classList.add('active');
             if (btn) btn.classList.add('active-tab');
-        }
+        };
+
+        /* ===== نظام تسجيل الدخول و Firebase ===== */
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            const nameInput = document.getElementById('login-name').value.trim();
+            const phoneInput = document.getElementById('login-phone').value.trim();
+            const errorMsg = document.getElementById('login-error');
+
+            if (!phoneInput) {
+                errorMsg.style.display = 'block';
+                return;
+            }
+            errorMsg.style.display = 'none';
+
+            // التحقق مما إذا كان المستخدم هو الأدمن
+            if (phoneInput === ADMIN_PASS) {
+                document.getElementById('admin-controls').style.display = 'block';
+                document.getElementById('parent-display-name').innerText = "لوحة الإدارة";
+                document.getElementById('parent-avatar').innerText = "م";
+            } else {
+                if (!nameInput) {
+                    errorMsg.style.display = 'block';
+                    return;
+                }
+                document.getElementById('admin-controls').style.display = 'none';
+                document.getElementById('parent-display-name').innerText = nameInput;
+                document.getElementById('parent-avatar').innerText = nameInput.charAt(0);
+                
+                // حفظ بيانات ولي الأمر في فايربيز (Firestore)
+                try {
+                    await addDoc(collection(db, "parents"), {
+                        name: nameInput,
+                        phone: phoneInput,
+                        timestamp: new Date()
+                    });
+                } catch (e) {
+                    console.error("Error saving data: ", e);
+                }
+            }
+            
+            // إغلاق تسجيل الدخول وفتح بوابة الآباء
+            document.getElementById('login-modal').classList.remove('open');
+            document.getElementById('portal-modal').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        });
+
+        /* ===== نظام تغيير رابط البث المباشر (Admin) ===== */
+        const streamDocRef = doc(db, "settings", "livestream");
+        
+        // استماع فوري لأي تغيير في رابط البث داخل Firebase
+        onSnapshot(streamDocRef, (docSnap) => {
+            if (docSnap.exists()) {
+                const data = docSnap.data();
+                if(data.url) {
+                    document.getElementById('live-video-iframe').src = data.url;
+                }
+            }
+        });
+
+        // حفظ الرابط الجديد من قبل الأدمن
+        document.getElementById('admin-save-url').addEventListener('click', async () => {
+            let url = document.getElementById('admin-stream-url').value;
+            if (url) {
+                // تحويل أي رابط يوتيوب إلى صيغة (embed) ليعمل داخل الموقع
+                let embedUrl = url;
+                if (url.includes('youtube.com/watch?v=')) {
+                    embedUrl = url.replace('youtube.com/watch?v=', 'youtube.com/embed/').split('&')[0];
+                } else if (url.includes('youtu.be/')) {
+                    const id = url.split('youtu.be/')[1].split('?')[0];
+                    embedUrl = `https://www.youtube.com/embed/${id}`;
+                } else if (url.includes('youtube.com/live/')) {
+                    const id = url.split('youtube.com/live/')[1].split('?')[0];
+                    embedUrl = `https://www.youtube.com/embed/${id}`;
+                }
+
+                try {
+                    await setDoc(streamDocRef, { url: embedUrl });
+                    const msg = document.getElementById('admin-msg');
+                    msg.style.display = 'block';
+                    document.getElementById('admin-stream-url').value = '';
+                    setTimeout(() => { msg.style.display = 'none'; }, 4000);
+                } catch (e) {
+                    console.error("Error updating link: ", e);
+                }
+            }
+        });
     </script>
 </body>
 </html>
