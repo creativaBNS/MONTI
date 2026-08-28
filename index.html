@@ -1,1 +1,563 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" class="lang-ar scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MontiSmart Preschool - حضانة مونتي سمارت</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- إعدادات Tailwind للاتجاهات والألوان -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0d2b51',    /* كحلي */
+                        secondary: '#009d94',  /* فيروزي */
+                        accent: '#f7a61c',     /* برتقالي/ذهبي */
+                    }
+                }
+            }
+        }
+    </script>
 
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&family=Nunito:wght@400;600;700;800&display=swap');
+        
+        /* دعم اللغات (إخفاء وإظهار بناءً على لغة الصفحة) */
+        .lang-en [lang="ar"] { display: none !important; }
+        .lang-ar [lang="en"] { display: none !important; }
+
+        /* تغيير الخط بناءً على اللغة */
+        .lang-ar body { font-family: 'Tajawal', sans-serif; }
+        .lang-en body { font-family: 'Nunito', sans-serif; }
+
+        body {
+            background-color: #f8fafc;
+            color: #334155;
+        }
+
+        /* خلفية القسم الرئيسي مخصصة للأطفال */
+        .hero-section {
+            background: linear-gradient(rgba(13, 43, 81, 0.75), rgba(0, 157, 148, 0.65)), 
+                        url('https://images.unsplash.com/photo-1516627145497-ae6968895b74?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+        }
+        
+        /* تأثيرات وحركات للأطفال */
+        .hover-bounce:hover { transform: translateY(-8px); }
+        .transition-all { transition: all 0.3s ease-in-out; }
+        
+        .blob-shape {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <nav class="bg-white/95 backdrop-blur-sm shadow-sm fixed w-full z-50 top-0 border-b border-gray-100">
+        <div class="container mx-auto px-6 py-3 flex justify-between items-center">
+            
+            <!-- الشعار -->
+            <div class="flex items-center gap-3">
+                <img src="WhatsApp Image 2026-08-28 at 3.05.05 AM_2.jpeg" alt="MontiSmart Logo" class="h-14 w-auto rounded object-contain" onerror="this.src='https://placehold.co/150x50/0d2b51/fff?text=MontiSmart'">
+                <div class="hidden sm:block">
+                    <span class="text-2xl font-bold text-primary block leading-none" lang="ar">مونتي<span class="text-secondary">سمارت</span></span>
+                    <span class="text-2xl font-bold text-primary block leading-none" lang="en">Monti<span class="text-secondary">Smart</span></span>
+                </div>
+            </div>
+            
+            <!-- روابط القائمة -->
+            <div class="hidden md:flex gap-6 items-center">
+                <a href="#home" class="text-gray-600 hover:text-secondary font-bold transition">
+                    <span lang="ar">الرئيسية</span><span lang="en">Home</span>
+                </a>
+                <a href="#about" class="text-gray-600 hover:text-secondary font-bold transition">
+                    <span lang="ar">عن الحضانة</span><span lang="en">About Us</span>
+                </a>
+                <a href="#smart-features" class="text-gray-600 hover:text-secondary font-bold transition">
+                    <span lang="ar">الأنظمة الذكية</span><span lang="en">Smart Features</span>
+                </a>
+                <a href="#programs" class="text-gray-600 hover:text-secondary font-bold transition">
+                    <span lang="ar">البرامج</span><span lang="en">Programs</span>
+                </a>
+                <a href="#live-cam" class="text-gray-600 hover:text-secondary font-bold transition flex items-center gap-1">
+                    <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                    <span lang="ar">الكاميرات</span><span lang="en">Live Cam</span>
+                </a>
+                
+                <a href="#contact" class="bg-accent text-white px-6 py-2 rounded-full hover:bg-yellow-500 transition font-bold shadow-md">
+                    <span lang="ar">تواصل معنا</span><span lang="en">Contact Us</span>
+                </a>
+
+                <!-- زر تغيير اللغة -->
+                <button onclick="toggleLanguage()" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-primary px-3 py-1.5 rounded-lg transition font-bold border border-gray-200 ml-2 mr-2">
+                    <i class="fas fa-globe"></i>
+                    <span id="lang-toggle-text">English</span>
+                </button>
+            </div>
+
+            <!-- زر القائمة للهواتف المحمولة -->
+            <div class="md:hidden flex items-center gap-3">
+                <button onclick="toggleLanguage()" class="text-primary font-bold bg-gray-100 px-2 py-1 rounded">
+                    <span id="lang-toggle-text-mobile">EN</span>
+                </button>
+                <button class="text-primary text-2xl focus:outline-none">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero-section min-h-screen flex items-center text-center text-white pt-20 relative overflow-hidden">
+        <!-- أشكال زخرفية للأطفال -->
+        <div class="absolute top-20 right-10 opacity-20 animate-bounce" style="animation-duration: 3s;"><i class="fas fa-star text-6xl text-accent"></i></div>
+        <div class="absolute bottom-20 left-10 opacity-20 animate-bounce" style="animation-duration: 4s;"><i class="fas fa-shapes text-6xl text-white"></i></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <h1 class="text-4xl md:text-7xl font-extrabold mb-6 drop-shadow-lg">
+                <span lang="ar">مرحباً بكم في <span class="text-accent">مونتي سمارت</span></span>
+                <span lang="en">Welcome to <span class="text-accent">MontiSmart</span></span>
+            </h1>
+            
+            <p class="text-2xl md:text-3xl mb-6 font-bold text-gray-100 drop-shadow-md">
+                <span lang="ar">أول حضانة ذكية للأطفال في بني سويف</span>
+                <span lang="en">The First Smart Preschool in Beni Suef</span>
+            </p>
+            
+            <p class="text-lg md:text-xl mb-10 max-w-3xl mx-auto font-medium text-gray-200 leading-relaxed bg-black/20 p-4 rounded-2xl backdrop-blur-sm">
+                <span lang="ar">نجمع بين عراقة منهج المونتيسوري وقوة التكنولوجيا (IoT) لنصنع مستقبلاً مشرقاً وآمناً لطفلك من عمر سنة إلى 5 سنوات. يتعلم، يستكشف، ويبدع!</span>
+                <span lang="en">Combining the authentic Montessori method with the power of Technology (IoT) to build a bright and safe future for your child (Ages 1-5). Learn, Explore, Create!</span>
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#about" class="bg-secondary hover:bg-teal-500 text-white font-bold py-3 px-8 rounded-full transition-all text-lg shadow-lg hover:scale-105 border-2 border-secondary">
+                    <span lang="ar">اكتشف عالمنا</span><span lang="en">Explore Our World</span>
+                </a>
+                <a href="#contact" class="bg-primary hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full transition-all text-lg shadow-lg hover:scale-105 border-2 border-primary">
+                    <span lang="ar">احجز مقعداً لطفلك</span><span lang="en">Book a Seat</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- شكل منحنى في أسفل القسم -->
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-[50px] md:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,130.41,113.88,189.56,97.7,233.15,85.64,277.62,72.48,321.39,56.44Z" fill="#f8fafc"></path>
+            </svg>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-5xl font-extrabold text-primary mb-4">
+                    <span lang="ar">لماذا <span class="text-secondary">مونتي سمارت؟</span></span>
+                    <span lang="en">Why <span class="text-secondary">MontiSmart?</span></span>
+                </h2>
+                <div class="h-2 w-24 bg-accent mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg">
+                    <span lang="ar">نحن لسنا مجرد حضانة، بل بيئة تعليمية متكاملة تهدف إلى تنمية قدرات طفلك في بيئة ذكية وآمنة.</span>
+                    <span lang="en">We are not just a preschool; we are an integrated educational environment designed to develop your child's skills safely.</span>
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white p-8 rounded-3xl text-center shadow-lg border-b-4 border-secondary hover-bounce transition-all relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-secondary opacity-10 blob-shape -mr-4 -mt-4"></div>
+                    <div class="w-20 h-20 bg-teal-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                        <i class="fas fa-shapes text-secondary text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-3">
+                        <span lang="ar">منهج مونتيسوري</span><span lang="en">Montessori Method</span>
+                    </h3>
+                    <p class="text-gray-600 font-medium">
+                        <span lang="ar">تعلم قائم على فلسفة منتيسوري بأدوات خشبية طبيعية لتنمية استقلالية الطفل واكتشاف مهاراته.</span>
+                        <span lang="en">Learning based on Montessori philosophy using natural wooden tools to develop child's independence.</span>
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-8 rounded-3xl text-center shadow-lg border-b-4 border-accent hover-bounce transition-all relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-accent opacity-10 blob-shape -mr-4 -mt-4"></div>
+                    <div class="w-20 h-20 bg-orange-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                        <i class="fas fa-robot text-accent text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-3">
+                        <span lang="ar">تكنولوجيا ذكية و Robotics</span><span lang="en">Smart Tech & Robotics</span>
+                    </h3>
+                    <p class="text-gray-600 font-medium">
+                        <span lang="ar">دمج المساعدات الصوتية (أليكسا) والروبوتات في اللعب ليعتاد الطفل على تطورات الذكاء الاصطناعي بشكل آمن.</span>
+                        <span lang="en">Integrating Voice Assistants (Alexa) and robots in play so children adapt to AI advancements safely.</span>
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-8 rounded-3xl text-center shadow-lg border-b-4 border-primary hover-bounce transition-all relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-24 h-24 bg-primary opacity-10 blob-shape -mr-4 -mt-4"></div>
+                    <div class="w-20 h-20 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6 shadow-inner">
+                        <i class="fas fa-shield-cat text-primary text-4xl"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-primary mb-3">
+                        <span lang="ar">أمان تام وبيئة صحية</span><span lang="en">Absolute Safety & Health</span>
+                    </h3>
+                    <p class="text-gray-600 font-medium">
+                        <span lang="ar">أنظمة أمان كهربائي وكاميرات مراقبة وأجهزة تنقية هواء لضمان صحة وسلامة أطفالنا على مدار اليوم.</span>
+                        <span lang="en">Electrical safety systems, cameras, and air purifiers to ensure our children's health and safety all day.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="smart-features" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="bg-blue-50 rounded-3xl p-8 md:p-12 shadow-sm border border-blue-100">
+                
+                <div class="text-center mb-16">
+                    <span class="bg-primary text-white text-sm font-bold px-4 py-1 rounded-full mb-3 inline-block">Smart IoT</span>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-primary mb-4 mt-4">
+                        <span lang="ar">حضانة <span class="text-secondary">سمارت</span> بالكامل</span>
+                        <span lang="en">Fully <span class="text-secondary">Smart</span> Preschool</span>
+                    </h2>
+                    <p class="text-gray-600 max-w-3xl mx-auto text-lg">
+                        <span lang="ar">جهزنا الحضانة بأحدث التقنيات لضمان أقصى درجات الأمان والتعليم التفاعلي.</span>
+                        <span lang="en">Equipped with the latest technologies to ensure maximum safety and interactive learning.</span>
+                    </p>
+                </div>
+
+                <!-- Feature 1: ELCB -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
+                            <div class="bg-accent text-white p-3 rounded-xl"><i class="fas fa-bolt"></i></div>
+                            <span lang="ar">نظام عوازل الكهرباء الذكي (ELCB)</span>
+                            <span lang="en">Smart Electrical Insulation (ELCB)</span>
+                        </h3>
+                        <p class="text-gray-700 leading-relaxed mb-4 font-medium">
+                            <span lang="ar">حماية طفلك أولويتنا. الحضانة مزودة بنظام فصل التيار اللحظي.</span>
+                            <span lang="en">Your child's safety is our priority. Equipped with instant circuit breakers.</span>
+                        </p>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                                <span lang="ar">في حالة لمس الطفل لأي مصدر كهربائي، يتم فصل التيار فوراً.</span>
+                                <span lang="en">Instantly cuts power if a child touches any electrical source.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-check-circle text-secondary mt-1"></i>
+                                <span lang="ar">يمنع حدوث أي ضرر نهائياً، بيئة استكشاف آمنة 100%.</span>
+                                <span lang="en">Prevents any harm absolutely, 100% safe exploration environment.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-white transform rotate-2 hover:rotate-0 transition-all">
+                       <!-- صورة أطفال يلعبون بأمان -->
+                       <img src="https://images.unsplash.com/photo-1594608661623-aa0bd3a69d98?q=80&w=1000&auto=format&fit=crop" alt="Safe Kids" class="w-full h-64 object-cover">
+                    </div>
+                </div>
+
+                <!-- Feature 2: Robots -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16 flex-col-reverse md:flex-row-reverse">
+                    <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-white transform -rotate-2 hover:rotate-0 transition-all">
+                        <!-- صورة روبوت/تكنولوجيا للأطفال -->
+                        <img src="https://images.unsplash.com/photo-1535303311164-664fc9ce6cb2?q=80&w=1000&auto=format&fit=crop" alt="Smart Robot" class="w-full h-64 object-cover">
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
+                            <div class="bg-secondary text-white p-3 rounded-xl"><i class="fas fa-robot"></i></div>
+                            <span lang="ar">المساعد الصوتي والروبوت التفاعلي</span>
+                            <span lang="en">Voice Assistant & Interactive Robot</span>
+                        </h3>
+                        <ul class="space-y-3 text-gray-600 font-medium">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-star text-accent mt-1"></i>
+                                <span lang="ar"><strong>أليكسا للتعليم:</strong> مساعدة الأطفال في النطق، الحساب، وسرد القصص الممتعة.</span>
+                                <span lang="en"><strong>Alexa for Education:</strong> Helps with pronunciation, math, and storytelling.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-star text-accent mt-1"></i>
+                                <span lang="ar"><strong>روبوت الصحة:</strong> روبوت ودود يلعب مع الأطفال ويقوم بقياس درجة حرارتهم يومياً بأمان.</span>
+                                <span lang="en"><strong>Health Robot:</strong> Friendly robot plays with kids and checks daily temperatures.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                 <!-- Feature 3: Air & Health -->
+                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold text-primary mb-4 flex items-center gap-3">
+                            <div class="bg-primary text-white p-3 rounded-xl"><i class="fas fa-wind"></i></div>
+                            <span lang="ar">هواء نقي وبيئة صحية</span>
+                            <span lang="en">Pure Air & Healthy Environment</span>
+                        </h3>
+                        <ul class="space-y-3 text-gray-600 font-medium">
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-leaf text-secondary mt-1"></i>
+                                <span lang="ar"><strong>منقيات هواء:</strong> فلاتر عالية الجودة لإزالة الملوثات والفيروسات من الفصول.</span>
+                                <span lang="en"><strong>Air Purifiers:</strong> High-quality filters to remove pollutants and viruses.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i class="fas fa-leaf text-secondary mt-1"></i>
+                                <span lang="ar"><strong>حساسات ذكية:</strong> قياس نسبة الرطوبة وثاني أكسيد الكربون وتشغيل التهوية تلقائياً.</span>
+                                <span lang="en"><strong>Smart Sensors:</strong> Measures humidity and CO2, activating ventilation automatically.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rounded-2xl overflow-hidden shadow-lg border-4 border-white transform rotate-1 hover:rotate-0 transition-all bg-white p-6 text-center flex flex-col justify-center h-64">
+                        <i class="fas fa-fan text-6xl text-secondary mb-4 animate-spin-slow"></i>
+                        <h4 class="text-xl font-bold text-primary">
+                            <span lang="ar">حماية تنفسية متكاملة</span><span lang="en">Complete Respiratory Protection</span>
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="live-cam" class="py-20 bg-primary text-white relative overflow-hidden">
+        <!-- زينة خلفية -->
+        <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-secondary opacity-20 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+             <div class="flex flex-col lg:flex-row items-center gap-12">
+                
+                <div class="lg:w-1/2">
+                    <div class="inline-flex items-center gap-2 bg-red-500/20 text-red-100 px-4 py-2 rounded-full mb-6 border border-red-500/30">
+                        <span class="w-3 h-3 rounded-full bg-red-500 animate-pulse"></span>
+                        <span class="font-bold tracking-wider" lang="ar">بث مباشر للآباء</span>
+                        <span class="font-bold tracking-wider" lang="en">LIVE STREAM FOR PARENTS</span>
+                    </div>
+                    
+                    <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+                        <span lang="ar">كيف يرى الآباء أطفالهم؟</span>
+                        <span lang="en">How Do Parents See Their Children?</span>
+                    </h2>
+                    
+                    <p class="mb-8 text-lg text-blue-100 font-medium">
+                        <span lang="ar">نوفر منظومة بث مباشر مستمر من خلال كاميرات داخل كل فصل، متصلة بالموقع والتطبيق الخاص بنا لتطمئن على طفلك في أي وقت.</span>
+                        <span lang="en">We provide continuous live streaming via cameras in every class, connected to our website/app so you can check on your child anytime.</span>
+                    </p>
+                    
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 backdrop-blur-sm">
+                            <i class="fas fa-lock text-3xl text-accent mb-3"></i>
+                            <h4 class="font-bold mb-1"><span lang="ar">خصوصية تامة</span><span lang="en">Total Privacy</span></h4>
+                            <p class="text-sm text-blue-200"><span lang="ar">لا يرى الطفل إلا ولي الأمر الخاص به.</span><span lang="en">Only parents can view their own child's class.</span></p>
+                        </div>
+                        <div class="bg-white/10 p-4 rounded-xl border border-white/10 backdrop-blur-sm">
+                            <i class="fas fa-user-shield text-3xl text-secondary mb-3"></i>
+                            <h4 class="font-bold mb-1"><span lang="ar">حساب آمن</span><span lang="en">Secure Login</span></h4>
+                            <p class="text-sm text-blue-200"><span lang="ar">دخول بيوزر وباسورد مخصص لكل ولي أمر.</span><span lang="en">Access via unique Username and Password.</span></p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2 w-full">
+                    <!-- واجهة الكاميرا الوهمية -->
+                    <div class="bg-gray-900 p-2 rounded-2xl shadow-2xl border border-gray-700 relative">
+                        <div class="absolute top-4 left-6 z-10 flex items-center gap-2">
+                             <span class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded flex items-center gap-1 shadow"><span class="w-2 h-2 bg-white rounded-full animate-pulse"></span> REC</span>
+                             <span class="bg-black/60 text-white text-xs px-2 py-1 rounded backdrop-blur-md">
+                                 <span lang="ar">فصل الفراشات (Montessori)</span><span lang="en">Butterflies Class (Montessori)</span>
+                             </span>
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1587691592099-24045742c181?q=80&w=2073&auto=format&fit=crop" alt="Kids in Class" class="w-full h-auto rounded-xl opacity-90">
+                        
+                        <!-- نموذج تسجيل الدخول فوق الكاميرا -->
+                        <div class="absolute inset-0 bg-black/70 rounded-xl flex items-center justify-center p-4 backdrop-blur-sm transition-opacity" id="login-overlay">
+                            <div class="bg-white text-gray-800 p-8 rounded-2xl w-full max-w-sm shadow-2xl">
+                                <div class="text-center mb-6">
+                                    <i class="fas fa-video text-secondary text-4xl mb-2"></i>
+                                    <h4 class="font-bold text-xl text-primary">
+                                        <span lang="ar">بوابة أولياء الأمور</span><span lang="en">Parents Portal</span>
+                                    </h4>
+                                </div>
+                                <form onsubmit="event.preventDefault(); document.getElementById('login-overlay').style.display='none';">
+                                    <input type="text" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg mb-3 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-start direction-ltr" placeholder="Username" required>
+                                    <input type="password" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg mb-4 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary text-start direction-ltr" placeholder="Password" required>
+                                    <button type="submit" class="w-full bg-secondary hover:bg-teal-600 text-white font-bold py-3 px-4 rounded-lg transition-colors shadow-md">
+                                        <span lang="ar">دخول للبث المباشر</span><span lang="en">Login to Live Stream</span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- صندوق التواصل -->
+                    <div class="mt-6 bg-white text-primary p-4 rounded-xl shadow-lg border border-gray-100 flex items-center justify-between">
+                         <div>
+                             <h5 class="font-bold flex items-center gap-2">
+                                 <i class="fas fa-comments text-secondary"></i>
+                                 <span lang="ar">تواصل مع معلمات الفصل</span><span lang="en">Contact Teachers</span>
+                             </h5>
+                             <p class="text-sm text-gray-500 font-medium">
+                                 <span lang="ar">مدرسات التكنولوجيا والمنتيسوري والإدارة.</span>
+                                 <span lang="en">Tech & Montessori Teachers, Admin.</span>
+                             </p>
+                         </div>
+                         <button class="bg-accent text-white font-bold px-4 py-2 rounded-lg hover:bg-yellow-500 transition shadow">
+                             <span lang="ar">محادثة</span><span lang="en">Chat</span>
+                         </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programs" class="py-20 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-primary mb-4">
+                    <span lang="ar">برامجنا وأنظمة <span class="text-accent">الاشتراك</span></span>
+                    <span lang="en">Programs & <span class="text-accent">Pricing</span></span>
+                </h2>
+                <div class="h-2 w-24 bg-secondary mx-auto rounded-full mb-4"></div>
+            </div>
+
+            <!-- الكامبات والبرامج -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-16">
+                <!-- Program 1 -->
+                <div class="bg-white p-6 border border-gray-100 rounded-2xl hover:shadow-xl transition-shadow text-center group cursor-default">
+                    <div class="w-16 h-16 mx-auto bg-blue-50 text-primary rounded-full flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform"><i class="fas fa-book-open"></i></div>
+                    <h4 class="font-bold text-lg mb-2 text-primary"><span lang="ar">الترم الأول</span><span lang="en">First Term</span></h4>
+                    <p class="text-sm text-gray-500"><span lang="ar">بناء الأساس وتنمية المهارات الأساسية.</span><span lang="en">Building foundation & basic skills.</span></p>
+                </div>
+                <!-- Program 2 -->
+                <div class="bg-white p-6 border border-gray-100 rounded-2xl hover:shadow-xl transition-shadow text-center group cursor-default">
+                    <div class="w-16 h-16 mx-auto bg-teal-50 text-secondary rounded-full flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform"><i class="fas fa-puzzle-piece"></i></div>
+                    <h4 class="font-bold text-lg mb-2 text-primary"><span lang="ar">الترم الثاني</span><span lang="en">Second Term</span></h4>
+                    <p class="text-sm text-gray-500"><span lang="ar">تنمية الاستقلالية والقدرات الفكرية.</span><span lang="en">Developing independence & intellect.</span></p>
+                </div>
+                <!-- Program 3 -->
+                <div class="bg-yellow-50 p-6 border border-yellow-100 rounded-2xl hover:shadow-xl transition-shadow text-center group cursor-default">
+                    <div class="w-16 h-16 mx-auto bg-white text-accent rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm group-hover:scale-110 transition-transform"><i class="fas fa-sun"></i></div>
+                    <h4 class="font-bold text-lg mb-2 text-accent"><span lang="ar">الكامب الصيفي</span><span lang="en">Summer Camp</span></h4>
+                    <p class="text-sm text-gray-600"><span lang="ar">أنشطة مرحة وتجارب ممتعة.</span><span lang="en">Fun activities and experiences.</span></p>
+                </div>
+                <!-- Program 4 -->
+                <div class="bg-blue-50 p-6 border border-blue-100 rounded-2xl hover:shadow-xl transition-shadow text-center group cursor-default">
+                    <div class="w-16 h-16 mx-auto bg-white text-blue-500 rounded-full flex items-center justify-center text-2xl mb-4 shadow-sm group-hover:scale-110 transition-transform"><i class="fas fa-snowflake"></i></div>
+                    <h4 class="font-bold text-lg mb-2 text-blue-600"><span lang="ar">الكامب الشتوي</span><span lang="en">Winter Camp</span></h4>
+                    <p class="text-sm text-gray-600"><span lang="ar">تجربة شتوية للحفاظ على نشاط الطفل.</span><span lang="en">Winter experience to keep kids active.</span></p>
+                </div>
+            </div>
+
+            <!-- لوحة الأسعار -->
+            <div class="bg-primary text-white rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden max-w-5xl mx-auto">
+                <div class="absolute top-0 right-0 rtl:right-auto rtl:left-0 bg-accent text-primary font-black px-10 py-3 rounded-bl-3xl shadow-lg rtl:rounded-bl-none rtl:rounded-br-3xl text-xl uppercase transform hover:scale-105 transition-transform">
+                    30% OFF
+                </div>
+                
+                <div class="text-center mb-10">
+                    <h3 class="text-3xl font-bold text-accent mb-2">
+                        <span lang="ar">عرض افتتاح فرع بني سويف!</span>
+                        <span lang="en">Beni Suef Branch Opening Offer!</span>
+                    </h3>
+                    <p class="text-xl text-blue-200">
+                        <span lang="ar">لأول دفعة فقط (مقدار مخفض)</span><span lang="en">For the first batch only</span>
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x md:rtl:divide-x-reverse divide-blue-800">
+                    <div class="p-4">
+                        <p class="text-blue-300 mb-2 font-medium"><span lang="ar">في السنة</span><span lang="en">Per Year</span></p>
+                        <div class="text-4xl font-extrabold text-secondary mb-2">24,000 <span class="text-xl font-bold"><span lang="ar">ج.م</span><span lang="en">EGP</span></span></div>
+                        <p class="line-through text-gray-400 text-sm"><span lang="ar">بدلاً من 34,000 ج.م</span><span lang="en">Instead of 34,000 EGP</span></p>
+                    </div>
+                    
+                    <div class="p-4">
+                        <p class="text-blue-300 mb-2 font-medium"><span lang="ar">دفعة مقدمة (لفتح الملف والتطبيق)</span><span lang="en">Down Payment (Enrollment & App)</span></p>
+                        <div class="text-4xl font-extrabold mb-2">4,000 <span class="text-xl font-bold"><span lang="ar">ج.م</span><span lang="en">EGP</span></span></div>
+                    </div>
+                    
+                    <div class="p-4">
+                        <p class="text-blue-300 mb-2 font-medium"><span lang="ar">قسط شهري (لمدة 10 أشهر)</span><span lang="en">Monthly Installment (10 Months)</span></p>
+                        <div class="text-4xl font-extrabold mb-2">2,000 <span class="text-xl font-bold"><span lang="ar">ج.م</span><span lang="en">EGP</span></span></div>
+                    </div>
+                </div>
+                
+                <div class="mt-10 mx-auto max-w-md bg-secondary/20 border border-secondary/50 p-4 rounded-xl flex items-center justify-center gap-4 text-center text-white">
+                    <i class="fas fa-bus text-3xl text-accent"></i> 
+                    <div>
+                        <strong class="block text-lg"><span lang="ar">الباص علينا!</span><span lang="en">Bus is on us!</span></strong>
+                        <span class="text-sm text-blue-100"><span lang="ar">خدمة مواصلات آمنة ومريحة مجاناً.</span><span lang="en">Free, safe, & comfortable transportation.</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-gray-900 text-gray-300 py-12 border-t-4 border-secondary">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center border-b border-gray-700 pb-10 mb-8 gap-8">
+                
+                <div class="text-center md:text-start flex flex-col items-center md:items-start">
+                    <div class="bg-white p-2 rounded-lg mb-4 inline-block">
+                        <img src="WhatsApp Image 2026-08-28 at 3.05.05 AM_2.jpeg" alt="MontiSmart Logo" class="h-12 w-auto" onerror="this.src='https://placehold.co/120x40/0d2b51/fff?text=Logo'">
+                    </div>
+                    <p class="text-sm max-w-xs leading-relaxed text-gray-400">
+                        <span lang="ar">أول حضانة ذكية في الصعيد. يتعلم . يستكشف . يبدع.</span>
+                        <span lang="en">The first smart preschool in Upper Egypt. Learn . Explore . Create.</span>
+                    </p>
+                </div>
+                
+                <div class="flex flex-col gap-4 text-center md:text-start font-medium">
+                    <a href="tel:01152147430" class="hover:text-accent transition flex items-center justify-center md:justify-start gap-3 text-lg">
+                        <i class="fas fa-phone-alt text-secondary"></i> <span class="direction-ltr">0115 214 7430</span>
+                    </a>
+                    <p class="flex items-center justify-center md:justify-start gap-3 text-gray-400">
+                        <i class="fas fa-map-marker-alt text-secondary"></i> 
+                        <span lang="ar">مدينة بني سويف - كورنيش النيل (بالقرب من قاعة المؤتمرات)</span>
+                        <span lang="en">Beni Suef City - Nile Corniche (Near Conference Hall)</span>
+                    </p>
+                    <a href="#" class="hover:text-blue-400 transition flex items-center justify-center md:justify-start gap-3">
+                        <i class="fab fa-facebook text-blue-500 text-xl"></i> montiSmart.eg
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center text-xs text-gray-500 font-bold">
+                <p>
+                    <span lang="ar">جميع الحقوق محفوظة &copy; 2026 لحضانة مونتي سمارت.</span>
+                    <span lang="en">All Rights Reserved &copy; 2026 MontiSmart Preschool.</span>
+                </p>
+                <div class="mt-4 md:mt-0 flex gap-3 text-secondary">
+                    <span>Montessori</span> &bull; <span>STEM</span> &bull; <span>Robotics</span> &bull; <span>Future Skills</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleLanguage() {
+            const htmlTag = document.documentElement;
+            const btnTextDesktop = document.getElementById('lang-toggle-text');
+            const btnTextMobile = document.getElementById('lang-toggle-text-mobile');
+
+            if (htmlTag.classList.contains('lang-ar')) {
+                // تبديل إلى الإنجليزية
+                htmlTag.classList.remove('lang-ar');
+                htmlTag.classList.add('lang-en');
+                htmlTag.setAttribute('lang', 'en');
+                htmlTag.setAttribute('dir', 'ltr');
+                btnTextDesktop.innerText = 'عربي';
+                btnTextMobile.innerText = 'عربي';
+            } else {
+                // تبديل إلى العربية
+                htmlTag.classList.remove('lang-en');
+                htmlTag.classList.add('lang-ar');
+                htmlTag.setAttribute('lang', 'ar');
+                htmlTag.setAttribute('dir', 'rtl');
+                btnTextDesktop.innerText = 'English';
+                btnTextMobile.innerText = 'EN';
+            }
+        }
+    </script>
+</body>
+</html>
